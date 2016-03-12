@@ -2,12 +2,16 @@
 package br.ufs.dcomp.banco.privado;
 
 import java.util.ArrayList;
+
 /**
  *@since 11/03/2016
+>>>>>>> 
  * @author Carol
  */
+
 public class Cliente {
     
+
    // declação de atributos
      private String rg;
      private String nome;
@@ -46,10 +50,28 @@ public class Cliente {
     public short getIdade(){
         return this.idade;
     }
-    protected boolean verificaRG(){
-        
-            
-        
+    protected boolean verificaRG(String rg){
+        boolean valorRG = true;
+        for (char c: rg.toCharArray()){
+            if( c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' 
+               || c == '6' || c == '7' || c == '8' || c == '9')
+            {
+               valorRG = true; 
+            } else{
+                System.out.println(" RG inválido!");
+                valorRG = false;
+            }
+        }
+           return valorRG;
     }
-
+    
+    protected boolean verificaIdade( short idade){
+        boolean valorIdade = true;
+        if( idade < 16){
+            System.out.println(" Criação de contas somente para maior de 16 anos!");
+            valorIdade = false;
+        } else
+            valorIdade = true;
+        return valorIdade;
+    }
 }
