@@ -37,7 +37,7 @@ public class Conta {
             saldo = saldo - quantia;
         }
         return true;
-
+        
     }
 
     public double getSaldo() {
@@ -47,27 +47,31 @@ public class Conta {
     public boolean transferir(Conta contaDestino, double quantia) {
         if (quantia > (saldo + Cliente.limite)) {
             System.out.println("A transferência não pode ser concluída, pois a quantia ultrapassa o valor disponível para o cliente");
-        } else {
+        }
+        else
+        {
             extrato.guardarTransferencia(saldo, quantia);
             contaDestino.saldo = contaDestino.saldo + quantia;
         }
+        
 
         return true;
-
+        
     }
 
     public boolean depositar(double quantia) {
         extrato.guardarDeposito(saldo, quantia);
         saldo = saldo + quantia;
         return true;
-
+        
     }
-
-    public Extrato gerarExtrato() {
+    
+    public Extrato gerarExtrato()
+    {
         //Dúvida: Carol, fazer o print das informações no método ou enviá-lo para o AppBanco? Estou em
         //dúvida se é possível exibir lá sem a necessidade de instanciar um objeto do tipo Extrato.
         return extrato;
-
+        
     }
 
 }
