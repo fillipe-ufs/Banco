@@ -14,14 +14,12 @@ public class Cliente {
    // declação de atributos
      private String rg;
      private String nome;
-     private double saldo;
      private double limite;
      private short idade;
     //construtor com inicialização de dados para ser usado na criação da conta
     public Cliente( String rg, String nome, double saldo, double limite, short idade){
         this.rg = rg;
         this.nome = nome;
-        this.saldo = saldo;
         this.limite = limite;
         this.idade = idade;   
     }
@@ -29,7 +27,6 @@ public class Cliente {
     public Cliente(){
         this.rg = rg;
         this.nome = nome;
-        this.saldo = saldo;
         this.limite = limite;
         this.idade = idade; 
     }
