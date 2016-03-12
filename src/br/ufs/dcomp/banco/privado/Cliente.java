@@ -10,8 +10,7 @@ import java.util.ArrayList;
  */
 
 public class Cliente {
-    
-
+   
    // declação de atributos
      private String rg;
      private String nome;
@@ -41,14 +40,24 @@ public class Cliente {
     public String getNome(){
         return this.nome;
     }
-    public double getSaldoCliente(){
-        return this.saldo;
-    }
     public double getLimite(){
         return this.limite;
     }
     public short getIdade(){
         return this.idade;
+    }
+    // métodos modificadores
+    public void setRG( String rg){
+        this.rg = rg;
+    }
+    public void setNome(String nome){
+        this.nome = nome;
+    }
+    public void setLimite( double limite){
+        this.limite = limite;
+    }
+    public void setIdade( short idade){
+        this.idade = idade;
     }
     protected boolean verificaRG(String rg){
         boolean valorRG = true;
