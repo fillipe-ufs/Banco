@@ -59,13 +59,8 @@ public class Extrato {
         setDate();
     }
 
-    public void guardarDeposito(Double saldoAnterior, Double quantia, Conta contaDestino) {
-        setOperacao("Depósito (+)");
-        this.saldoAnterior.add(saldoAnterior);
-        this.quantia.add(quantia);
-        setDate();
-        this.nomeDestino.add(contaDestino.getCliente().getNome());
-    }
+ 
+    
     
 
 }

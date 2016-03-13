@@ -45,11 +45,7 @@ public class Conta {
         return saldo;
     }
     
-    private void setSaldo(double saldo)
-    {
-        this.saldo = saldo;
-    }
-
+    
     public boolean transferir(Conta contaDestino, double quantia) {
         if (quantia > (saldo + cliente.getLimite())) {
             System.out.println("A transferência não pode ser concluída, pois a quantia ultrapassa o valor disponível para o cliente");
@@ -62,12 +58,6 @@ public class Conta {
 
     }
 
-    public boolean depositar(double quantia, Conta contaDestino) {
-        extrato.guardarDeposito(saldo, quantia, contaDestino);
-        contaDestino.saldo = saldo + quantia;
-        return true;
-
-    }
 
     public Extrato gerarExtrato() {
         //Dúvida: Carol, fazer o print das informações no método ou enviá-lo para o AppBanco? Estou em
@@ -88,9 +78,6 @@ public class Conta {
 
         }
     }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
+    
 
 }
