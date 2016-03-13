@@ -19,7 +19,7 @@ public class Conta {
     private static int codigo;
 
     public Conta(double saldo, Cliente cliente) {
-        this.Cliente = new Cliente();
+        this.cliente = new Cliente();
         IncrementarCodigo();
         extrato = new Extrato();
         this.saldo = saldo;
@@ -30,7 +30,7 @@ public class Conta {
     }
 
     public boolean Sacar(double quantia) {
-        if (quantia > saldo + Cliente.getLimite) {
+        if (quantia > saldo + cliente.getLimite()) {
             System.out.println("A quantia não pode ser sacada, pois ultrapassa o valor disponível para o cliente");
         } else {
             extrato.guardarSaque(saldo, quantia);
@@ -45,7 +45,7 @@ public class Conta {
     }
 
     public boolean transferir(Conta contaDestino, double quantia) {
-        if (quantia > (saldo + Cliente.limite)) {
+        if (quantia > (saldo + cliente.getLimite())) {
             System.out.println("A transferência não pode ser concluída, pois a quantia ultrapassa o valor disponível para o cliente");
         }
         else
