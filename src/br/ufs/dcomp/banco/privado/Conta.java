@@ -16,16 +16,17 @@ public class Conta {
     private Cliente cliente;
     private Extrato extrato;
     private double saldo;
-    private static int codigo;
+    private int codigo;
 
     public Conta(double saldo, Cliente cliente) {
+
         this.cliente = new Cliente();
         IncrementarCodigo();
         extrato = new Extrato();
         this.saldo = saldo;
     }
 
-    private static void IncrementarCodigo() {
+    private void IncrementarCodigo() {
         codigo++;
     }
 
@@ -37,41 +38,59 @@ public class Conta {
             saldo = saldo - quantia;
         }
         return true;
-        
+
     }
 
     public double getSaldo() {
         return saldo;
     }
+    
+    private void setSaldo(double saldo)
+    {
+        this.saldo = saldo;
+    }
 
     public boolean transferir(Conta contaDestino, double quantia) {
         if (quantia > (saldo + cliente.getLimite())) {
             System.out.println("A transferência não pode ser concluída, pois a quantia ultrapassa o valor disponível para o cliente");
-        }
-        else
-        {
-            extrato.guardarTransferencia(saldo, quantia);
+        } else {
+            extrato.guardarTransferencia(saldo, quantia, contaDestino);
             contaDestino.saldo = contaDestino.saldo + quantia;
         }
-        
 
         return true;
-        
+
     }
 
-    public boolean depositar(double quantia) {
-        extrato.guardarDeposito(saldo, quantia);
-        saldo = saldo + quantia;
+    public boolean depositar(double quantia, Conta contaDestino) {
+        extrato.guardarDeposito(saldo, quantia, contaDestino);
+        contaDestino.saldo = saldo + quantia;
         return true;
-        
+
     }
-    
-    public Extrato gerarExtrato()
-    {
+
+    public Extrato gerarExtrato() {
         //Dúvida: Carol, fazer o print das informações no método ou enviá-lo para o AppBanco? Estou em
         //dúvida se é possível exibir lá sem a necessidade de instanciar um objeto do tipo Extrato.
         return extrato;
-        
+
+    }
+
+    public boolean buscarCliente(String rg) {
+        if (cliente.verificaRG(rg) == false) {
+            return false;
+        } else {
+            if (cliente.getRG().equals(rg)) {
+                return true;
+            } else {
+                return false;
+            }
+
+        }
+    }
+
+    public Cliente getCliente() {
+        return cliente;
     }
 
 }

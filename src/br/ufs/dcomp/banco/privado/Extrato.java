@@ -20,6 +20,7 @@ public class Extrato {
     private List<String> operacoes;
     private List<Double> quantia;
     private List<Double> saldoAnterior;
+    private List <String> nomeDestino;
     private final SimpleDateFormat formato;
     private Date minhaData;
 
@@ -29,6 +30,7 @@ public class Extrato {
         operacoes = new ArrayList<>();
         quantia = new ArrayList<>();
         saldoAnterior = new ArrayList<>();
+        nomeDestino = new ArrayList<>();
     }
 
     private void setDate() {
@@ -41,11 +43,12 @@ public class Extrato {
         operacoes.add(operador);
     }
 
-    public void guardarTransferencia(Double saldoAnterior, Double quantia) {
+    public void guardarTransferencia(Double saldoAnterior, Double quantia, Conta contaDestino) {
         
         setOperacao("Transferência (-)");
         this.saldoAnterior.add(saldoAnterior);
         this.quantia.add(quantia);
+        this.nomeDestino.add(contaDestino.getCliente().getNome());
         setDate();
     }
 
@@ -56,11 +59,12 @@ public class Extrato {
         setDate();
     }
 
-    public void guardarDeposito(Double saldoAnterior, Double quantia) {
+    public void guardarDeposito(Double saldoAnterior, Double quantia, Conta contaDestino) {
         setOperacao("Depósito (+)");
         this.saldoAnterior.add(saldoAnterior);
         this.quantia.add(quantia);
         setDate();
+        this.nomeDestino.add(contaDestino.getCliente().getNome());
     }
     
 

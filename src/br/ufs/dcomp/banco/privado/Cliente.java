@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class Cliente {
    
-   // declação de atributos
+   // declaração de atributos
      private String rg;
      private String nome;
      private double limite;
