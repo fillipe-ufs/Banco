@@ -56,7 +56,7 @@ public class Cliente {
     public void setIdade( short idade){
         this.idade = idade;
     }
-    protected boolean verificaRG(String rg){
+    protected static boolean verificaRG(String rg){
         boolean valorRG = true;
         for (char c: rg.toCharArray()){
             if( c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' 

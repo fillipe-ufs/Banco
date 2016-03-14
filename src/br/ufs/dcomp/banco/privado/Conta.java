@@ -83,5 +83,10 @@ public class Conta {
     {
         return cliente;
     }
+    
+    public int getCodigo()
+    {
+        return codigo;
+    }
 
 }

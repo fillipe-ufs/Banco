@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Banco {
 
-    private static int codigo;
+    private int codigo;
     private String sigla;
     private String nome;
     private double montante;
@@ -27,7 +27,7 @@ public class Banco {
         incrementarCodigo();
     }
 
-    private static void incrementarCodigo() {
+    private  void incrementarCodigo() {
         codigo++;
     }
 
@@ -40,7 +40,7 @@ public class Banco {
 
     public double getSaldoCliente(String rg) {
         double saldoCliente = 0;
-        if (verificaRG(rg) == false) {
+        if (Cliente.verificaRG(rg) == false) {
             return 0;
         }
         List<Conta> contas;
@@ -51,7 +51,6 @@ public class Banco {
                 for (Conta conta : contas) {
                     saldoCliente = saldoCliente + conta.getSaldo();
                 }
-            } else {
             }
         }
         return saldoCliente;
@@ -61,21 +60,7 @@ public class Banco {
         this.montante = getMontante() + valor;
 
     }
-
-    protected boolean verificaRG(String rg) {
-        boolean valorRG = true;
-        for (char c : rg.toCharArray()) {
-            if (c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5'
-                    || c == '6' || c == '7' || c == '8' || c == '9') {
-                valorRG = true;
-            } else {
-                System.out.println(" RG inválido!");
-                valorRG = false;
-            }
-        }
-        return valorRG;
-    }
-    
+  
     public String getSigla()
     {
         return sigla;
