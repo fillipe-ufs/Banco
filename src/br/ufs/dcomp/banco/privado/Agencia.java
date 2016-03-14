@@ -53,5 +53,20 @@ public class Agencia {
 
         return saldoNaAgencia;
     }
-
+    
+    public List buscarConta (String rg)
+    {
+        List <Conta> contas;
+        contas = new ArrayList<>();
+        for (int i = 0; i < contas.size(); i++) {
+            
+            if(contas.get(i).buscarCliente(rg) == true)
+                contas.add(this.contas.get(i));
+            
+        }
+        return contas;
+        
+    }
+    
+    
 }
