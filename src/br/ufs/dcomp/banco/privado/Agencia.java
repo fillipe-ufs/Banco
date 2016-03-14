@@ -67,7 +67,7 @@ public class Agencia {
 
     }
 
-    public List buscarConta(int codigo) {
+    protected List buscarConta(int codigo) { // Saber a agência onde está a conta é fundamental.
         List<Conta> contasBusca;
         contasBusca = new ArrayList<>();
         for (int i = 0; i < this.contas.size(); i++) {

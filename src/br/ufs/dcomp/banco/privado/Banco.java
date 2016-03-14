@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Banco {
 
-    private int codigo;
+    private static int codigo;
     private String sigla;
     private String nome;
     private double montante;
@@ -27,7 +27,7 @@ public class Banco {
         incrementarCodigo();
     }
 
-    private  void incrementarCodigo() {
+    private static void incrementarCodigo() {
         codigo++;
     }
 
@@ -60,17 +60,27 @@ public class Banco {
         this.montante = getMontante() + valor;
 
     }
-  
-    public String getSigla()
-    {
+
+    public String getSigla() {
         return sigla;
     }
-    
-     public String getNome()
-    {
+
+    public String getNome() {
         return nome;
     }
-     
-     
+
+    public List encontrarConta(int codAgencia, int codConta) {
+        List<Conta> contaBuscada;
+        contaBuscada = new ArrayList<>();
+        for (int i = 0; i < agencias.size(); i++) {
+            if (agencias.get(i).getCodigo() == codAgencia) {
+                contaBuscada = agencias.get(i).buscarConta(codConta);
+            }
+            if (i == agencias.size() - 1) {
+                System.out.println("Agência não encontrada!");
+            }
+        }
+        return contaBuscada; // Tratamento de informação necessário.
+    }
 
 }
