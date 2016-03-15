@@ -82,5 +82,10 @@ public class Agencia {
     {
         return codigo;
     }
+    
+    protected List getContas()
+    {
+    return contas;
+    }
 
 }

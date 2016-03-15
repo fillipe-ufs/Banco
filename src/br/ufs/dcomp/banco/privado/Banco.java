@@ -52,6 +52,7 @@ public class Banco {
                     saldoCliente = saldoCliente + conta.getSaldo();
                 }
             }
+
         }
         return saldoCliente;
     }
@@ -81,6 +82,23 @@ public class Banco {
             }
         }
         return contaBuscada; // Tratamento de informação necessário.
+    }
+
+    public Cliente encontrarCliente(String rg) //Impede recadastro de um cliente. Tratamento: Se getIdade = 0, logo não hÁ CLIENTE
+    {
+        Cliente clienteBusca;
+        clienteBusca = new Cliente();
+        List<Conta> contaBusca;
+        contaBusca = new ArrayList<>();
+        for (int i = 0; i < agencias.size(); i++) {
+            contaBusca = agencias.get(i).buscarConta(rg);
+
+        }
+        if (!contaBusca.isEmpty()) {
+            clienteBusca = contaBusca.get(0).getCliente();
+        }
+
+        return clienteBusca;
     }
 
 }
