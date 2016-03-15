@@ -14,11 +14,11 @@ import java.util.ArrayList;
  */
 public class Agencia {
 
-    private int codigo;
+    private static int codigo;
     private List<Conta> contas; // necessariamente uma agência precisa começar com uma conta?
     // isso traz implicações diretas no construtor
 
-    private void incrementoAgencia() {
+    private static void incrementoAgencia() {
         codigo++;
     }
 
@@ -77,15 +77,13 @@ public class Agencia {
         }
         return contasBusca; // Validação necessária no módulo principal. Se a lista estiver vazia, logo a conta buscada não existe.
     }
-    
-    public int getCodigo()
-    {
+
+    public int getCodigo() {
         return codigo;
     }
-    
-    protected List getContas()
-    {
-    return contas;
+
+    protected List getContas() {
+        return contas;
     }
 
 }

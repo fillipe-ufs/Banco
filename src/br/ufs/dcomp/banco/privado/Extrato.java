@@ -20,7 +20,7 @@ public class Extrato {
     private List<String> operacoes;
     private List<Double> quantia;
     private List<Double> saldoAnterior;
-    private List <String> nomeDestino;
+    private List<String> nomeDestino;
     private final SimpleDateFormat formato;
     private Date minhaData;
 
@@ -33,33 +33,56 @@ public class Extrato {
         nomeDestino = new ArrayList<>();
     }
 
-    private void setDate() {
+    private String getDate() {
         minhaData = new Date();
         String data = formato.format(minhaData);
-        datas.add(data);
+        return data;
     }
 
-    private void setOperacao(String operador) {
-        operacoes.add(operador);
+    private String setOperacao(String operador) {
+        return operador;
     }
 
     public void guardarTransferencia(Double saldoAnterior, Double quantia, Conta contaDestino) {
-        
-        setOperacao("Transferência (-)");
+
+        this.operacoes.add(setOperacao("Transferência (-)"));
         this.saldoAnterior.add(saldoAnterior);
         this.quantia.add(quantia);
         this.nomeDestino.add(contaDestino.getCliente().getNome());
-        setDate();
+        this.datas.add(getDate());
     }
 
     public void guardarSaque(Double saldoAnterior, Double quantia) {
-        setOperacao("Saque (-)");
+        this.operacoes.add(setOperacao("Saque (-)"));
         this.saldoAnterior.add(saldoAnterior);
         this.quantia.add(quantia);
-        setDate();
+        this.nomeDestino.add("Saque"); // Não precisa exibir
+        this.datas.add(getDate());
     }
 
- 
+    public void receberDeposito(Conta contaDestino, Double quantia) {
+        this.operacoes.add(setOperacao("Depósito ATM (+)"));
+        this.saldoAnterior.add(contaDestino.getSaldo());
+        this.quantia.add(quantia);
+        this.nomeDestino.add("Depósito ATM"); // Não precisa exibir
+        this.datas.add(getDate());
+
+    }
+    
+    public void guardarTransferenciaContaDestino(Double quantia, Conta contaDestino, String nomeContaOrigem) {
+
+        
+        this.operacoes.add(setOperacao("Transferência (-)"));
+        this.saldoAnterior.add(contaDestino.getSaldo());
+        this.quantia.add(quantia);
+        this.nomeDestino.add(nomeContaOrigem);
+        this.datas.add(getDate());
+        
+        
+        
+        //Objetivo: Colocar os valores no extrato da outra conta.
+    }
+    
     
     
 

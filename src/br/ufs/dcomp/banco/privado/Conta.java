@@ -16,7 +16,7 @@ public class Conta {
     private Cliente cliente;
     private Extrato extrato;
     private double saldo;
-    private int codigo;
+    private static int codigo;
 
     public Conta(double saldo, Cliente cliente) {
 
@@ -26,7 +26,7 @@ public class Conta {
         this.saldo = saldo;
     }
 
-    private void IncrementarCodigo() {
+    private static void IncrementarCodigo() {
         codigo++;
     }
 
@@ -52,6 +52,9 @@ public class Conta {
         } else {
             extrato.guardarTransferencia(saldo, quantia, contaDestino);
             contaDestino.saldo = contaDestino.saldo + quantia;
+            this.saldo = this.saldo-quantia;
+            contaDestino.getExtrato().guardarTransferenciaContaDestino(quantia, contaDestino, cliente.getNome());
+            
         }
 
         return true;
@@ -91,4 +94,13 @@ public class Conta {
         return codigo;
     }
 
+    public Extrato getExtrato()
+    {
+        return extrato;
+    }
+    
+    private void setSaldo(Double valor)
+    {
+        this.saldo = this.saldo - valor;
+    }
 }
