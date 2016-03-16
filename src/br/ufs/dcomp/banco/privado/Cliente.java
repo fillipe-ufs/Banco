@@ -3,7 +3,7 @@ package br.ufs.dcomp.banco.privado;
 
 import java.util.ArrayList;
 
-/** Classe para captar informações básicas de um cliente de um
+/** Classe para captar informações básicas de um cliente de um cliente
  *@since 11/03/2016
  * @author Carol e Fillipe Paz 
  */
