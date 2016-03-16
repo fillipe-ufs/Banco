@@ -14,24 +14,19 @@ import java.util.ArrayList;
  */
 public class Agencia {
 
-    private  int codigoConta = 1;
+    private int codigoConta = 1;
     private int codigo; // Será gerado na classe banco;
-    
     private List<Conta> contas; // necessariamente uma agência precisa começar com uma conta?
     // isso traz implicações diretas no construtor
 
-    private void incrementoAgencia() {
-        codigo++; // modificar
-    }
+    public Agencia(int codigo) {
 
-    public Agencia() {
-        incrementoAgencia();
         contas = new ArrayList<>();
+
         /* crio a conta para o pagamento de faturas?
          um possibilidade é criar 1 Cliente cliente nessa classe que só vai ser útil para esse fim
          - tópico: pagamento de contas
          */
-
     }
 
     public double getMontanteAgencia() {

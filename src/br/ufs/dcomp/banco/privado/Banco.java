@@ -14,8 +14,9 @@ import java.util.ArrayList;
  */
 public class Banco {
 
-    private static int codigo;
+    private static int codigoBancos;
     private int codigoAgencias = 1; 
+    private int codigo;
     private String sigla;
     private String nome;
     private double montante;
@@ -25,11 +26,17 @@ public class Banco {
         this.nome = nome;
         this.sigla = sigla;
         agencias = new ArrayList<>();
-        incrementarCodigo();
+        codigo = codigoBancos;
+        incrementarCodigoBancos();
     }
 
-    private static void incrementarCodigo() {
-        codigo++;
+    private void incrementarCodigoAgencia() {
+        codigoAgencias++;
+    }
+    
+    private void incrementarCodigoBancos()
+    {
+        codigoBancos++;
     }
 
     public double getMontante() {
@@ -78,23 +85,32 @@ public class Banco {
                 System.out.println("Agência não encontrada!");
             }
         }
-        return contaBuscada; // Tratamento de informação necessário.
+        
+        return contaBuscada; // Tratamento de informação necessário. 
+        //Se a lista estiver vazia, logo a conta não existe. 
     }
 
-    public Cliente encontrarCliente(String rg) //Impede recadastro de um cliente. Tratamento: Se getIdade = 0, logo não hÁ CLIENTE
+    public void criarAgencia()
     {
-        Cliente clienteBusca;
-        List<Conta> contaBusca;
-        contaBusca = new ArrayList<>();
-        for (int i = 0; i < agencias.size(); i++) {
-            contaBusca = agencias.get(i).buscarConta(rg);
-
-        }
-        if (!contaBusca.isEmpty()) {
-            clienteBusca = contaBusca.get(0).getCliente(0);
-        }
-
-        return clienteBusca; // rearranjo List
+        Agencia agencia = new Agencia(codigoAgencias);
+        this.agencias.add(agencia);
+                incrementarCodigoAgencia();
     }
+    
+    public int getCodigo()
+    {
+        return codigo;
+    }
+    
+    public void setSigla(String sigla)
+    {
+        this.sigla = sigla;
+    }
+    
+    public void setNome(String nome)
+    {
+        this.nome = nome;
+    }
+
 
 }
