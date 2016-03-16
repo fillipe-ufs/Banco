@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Banco {
     // declaração de atributos e lista de agências.
     private static int codigoBancos;
-    private int codigoAgencias = 1; 
+    private int codigoAgencias = 0; 
     private int codigo;
     private String sigla;
     private String nome;
@@ -119,6 +119,11 @@ public class Banco {
     public void setNome(String nome)
     {
         this.nome = nome;
+    }
+    
+    public List getAgencia()
+    {
+        return agencias;
     }
 
 

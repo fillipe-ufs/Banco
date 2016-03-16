@@ -5,6 +5,7 @@
  */
 
 package br.ufs.dcomp.banco;
+import br.ufs.dcomp.banco.privado.*;
 
 /**
  * 
