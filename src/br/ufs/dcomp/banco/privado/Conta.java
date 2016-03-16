@@ -18,21 +18,20 @@ public class Conta {
     private Extrato extrato;
     private double saldo;
     private double limite;
-    private static int codigo; // Precisa ser modificado de modo a zerar de agência para agência.
+    private int codigo; // Precisa ser modificado de modo a zerar de agência para agência.
 
-    public Conta(double saldo, Cliente cliente, double limite) {
+    public Conta(double saldo, Cliente cliente, double limite, int codigo) {
 
         this.cliente = new ArrayList<>();
-        IncrementarCodigo();
+        
         extrato = new Extrato();
         this.saldo = saldo;
         this.cliente.add(cliente); // Conta conjunta possível
         this.limite = limite;
+        this.codigo = codigo;
     }
 
-    private static void IncrementarCodigo() {
-        codigo++;
-    }
+  
 
     public boolean Sacar(double quantia) {
 
@@ -129,6 +128,8 @@ public class Conta {
         }
         return clienteBusca; // Se a lista for size 0, então o cliente não se encontra no banco.
     }
+    
+    
 
     public Cliente getCliente(int i) {
         return cliente.get(i);
