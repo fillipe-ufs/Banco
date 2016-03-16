@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class Banco {
 
     private static int codigo;
+    private int codigoAgencias = 1; 
     private String sigla;
     private String nome;
     private double montante;

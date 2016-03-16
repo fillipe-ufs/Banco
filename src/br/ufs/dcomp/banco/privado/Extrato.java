@@ -45,10 +45,12 @@ public class Extrato {
 
     public void guardarTransferencia(Double saldoAnterior, Double quantia, Conta contaDestino) {
 
+        List <Cliente> cliente = new ArrayList<>();
         this.operacoes.add(setOperacao("Transferência (-)"));
         this.saldoAnterior.add(saldoAnterior);
         this.quantia.add(quantia);
-        this.nomeDestino.add(contaDestino.getCliente(0).getNome());
+        cliente = contaDestino.getCliente();
+        this.nomeDestino.add(cliente.get(0).getNome());
         this.datas.add(getDate());
     }
 

@@ -14,7 +14,9 @@ import java.util.ArrayList;
  */
 public class Agencia {
 
-    private static int codigo = 0;
+    private  int codigoConta = 1;
+    private int codigo; // Será gerado na classe banco;
+    
     private List<Conta> contas; // necessariamente uma agência precisa começar com uma conta?
     // isso traz implicações diretas no construtor
 
@@ -71,7 +73,7 @@ public class Agencia {
         List<Conta> contasBusca;
         contasBusca = new ArrayList<>();
         for (int i = 0; i < this.contas.size(); i++) {
-            if (codigo == contasBusca.get(i).getCodigo()) {
+            if (codigo == this.contas.get(i).getCodigo()) {
                 contasBusca.add(this.contas.get(i));
             }
         }
@@ -89,7 +91,7 @@ public class Agencia {
     public void criarConta(Cliente cliente, double limite, double saldo) {
         Conta conta = new Conta(saldo, cliente, limite, codigo);
         contas.add(conta);
-        this.codigo++;
+        this.codigoConta++;
     }
 
     public void atrelarCliente(Cliente cliente, int codigo) {
