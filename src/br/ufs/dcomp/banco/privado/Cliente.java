@@ -3,33 +3,30 @@ package br.ufs.dcomp.banco.privado;
 
 import java.util.ArrayList;
 
-/**
+/** Classe para captar informações básicas de um cliente de um
  *@since 11/03/2016
->>>>>>> 
- * @author Carol
+ * @author Carol e Fillipe Paz 
  */
 
 public class Cliente {
    
-   // declaração de atributos
+   //declaração de atributos do Cliente
      private String rg; /* Pagamento (boleto: com data e valor), contas conjuntas, classe teste */  
      private String nome;
-     
      private short idade;
-    //construtor com inicialização de dados para ser usado na criação da conta
-    public Cliente( String rg, String nome, double saldo, double limite, short idade){
-        this.idade = 0;
+     
+    /** Construtor com inicialização de dados para ser como teste. */
+    public Cliente( String rg, String nome, double saldo, short idade){
+        this.idade = idade;
         this.rg = rg;
         this.nome = nome;
-        
         this.idade = idade;   
     }
-    //construtor de teste ou outros fins
+    /** Construtor de teste para ser inicializado via usuário. */
     public Cliente(){
-        this.idade = 0;
+        this.idade = idade;
         this.rg = rg;
         this.nome = nome;
-        
         this.idade = idade; 
     }
     //métodos acessores
@@ -54,6 +51,10 @@ public class Cliente {
     public void setIdade( short idade){
         this.idade = idade;
     }
+    /** Verifica e valida o número de RG digitado pelo usuário.
+     * @param  String rg
+     * @return boolean valorRG - Retorna true caso o usuário tenha digitado somente números.
+    */
     protected static boolean verificaRG(String rg){
         boolean valorRG = true;
         for (char c: rg.toCharArray()){
@@ -68,7 +69,9 @@ public class Cliente {
         }
            return valorRG;
     }
-    
+    /** Verifica a idade do usuário.
+      @param short idade
+      @return boolean valorIdade - retorna true se o cliente for maior de 16 anos. */
     protected boolean verificaIdade( short idade){
         boolean valorIdade = true;
         if( idade < 16){
