@@ -131,8 +131,8 @@ public class Conta {
     
     
 
-    public Cliente getCliente(int i) {
-        return cliente.get(i);
+    public List getCliente() {
+        return cliente;
     }
 
     public int getCodigo() {

@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Agencia {
 
-    private static int codigo =0;
+    private static int codigo = 0;
     private List<Conta> contas; // necessariamente uma agência precisa começar com uma conta?
     // isso traz implicações diretas no construtor
 
@@ -47,7 +47,7 @@ public class Agencia {
         for (Conta conta : contas) {
             if (!conta.buscarCliente(rg).isEmpty()) { // rearranjo List
                 saldoNaAgencia = saldoNaAgencia + conta.getSaldo();
-                
+
             }
         }
 
@@ -85,12 +85,23 @@ public class Agencia {
     protected List getContas() {
         return contas;
     }
-    
-    public void criarConta(Cliente cliente, double limite, double saldo)
-    {
+
+    public void criarConta(Cliente cliente, double limite, double saldo) {
         Conta conta = new Conta(saldo, cliente, limite, codigo);
         contas.add(conta);
         this.codigo++;
+    }
+
+    public void atrelarCliente(Cliente cliente, int codigo) {
+        List<Conta> conta;
+        conta = new ArrayList<>();
+        if (buscarConta(codigo).isEmpty()) {
+            System.out.println("A conta não existe");
+        } else {
+            conta = buscarConta(codigo);
+            conta.get(0).getCliente().add(cliente);
+        }
+
     }
 
 }
