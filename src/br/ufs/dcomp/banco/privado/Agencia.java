@@ -45,7 +45,7 @@ public class Agencia {
         double saldoNaAgencia = 0;
 
         for (Conta conta : contas) {
-            if (conta.buscarCliente(rg) == true) {
+            if (conta.buscarCliente(rg) == true) { // rearranjo List
                 saldoNaAgencia = saldoNaAgencia + conta.getSaldo();
             }
         }
@@ -58,7 +58,7 @@ public class Agencia {
         contasBusca = new ArrayList<>();
         for (int i = 0; i < this.contas.size(); i++) {
 
-            if (contasBusca.get(i).buscarCliente(rg) == true) {
+            if (this.contas.get(i).buscarCliente(rg) == true) { // rearranjo List
                 contasBusca.add(this.contas.get(i));
             }
 

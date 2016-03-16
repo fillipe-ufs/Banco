@@ -48,7 +48,7 @@ public class Extrato {
         this.operacoes.add(setOperacao("Transferência (-)"));
         this.saldoAnterior.add(saldoAnterior);
         this.quantia.add(quantia);
-        this.nomeDestino.add(contaDestino.getCliente().getNome());
+        this.nomeDestino.add(contaDestino.getCliente(0).getNome());
         this.datas.add(getDate());
     }
 
@@ -72,7 +72,7 @@ public class Extrato {
     public void guardarTransferenciaContaDestino(Double quantia, Conta contaDestino, String nomeContaOrigem) {
 
         
-        this.operacoes.add(setOperacao("Transferência (-)"));
+        this.operacoes.add(setOperacao("Transferência (+)"));
         this.saldoAnterior.add(contaDestino.getSaldo());
         this.quantia.add(quantia);
         this.nomeDestino.add(nomeContaOrigem);
@@ -80,7 +80,16 @@ public class Extrato {
         
         
         
+        
         //Objetivo: Colocar os valores no extrato da outra conta.
+    }
+    
+    public void guardarPagamento(Double saldoAnterior, Double quantia, String codigo) {
+        this.operacoes.add(setOperacao("Pagamento (-)"));
+        this.saldoAnterior.add(saldoAnterior);
+        this.quantia.add(quantia);
+        this.nomeDestino.add(codigo); // código do boleto.
+        this.datas.add(getDate());
     }
     
     

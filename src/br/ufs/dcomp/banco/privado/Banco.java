@@ -57,10 +57,6 @@ public class Banco {
         return saldoCliente;
     }
 
-    protected void setMontante(double valor) {
-        this.montante = getMontante() + valor;
-
-    }
 
     public String getSigla() {
         return sigla;
@@ -87,7 +83,6 @@ public class Banco {
     public Cliente encontrarCliente(String rg) //Impede recadastro de um cliente. Tratamento: Se getIdade = 0, logo não hÁ CLIENTE
     {
         Cliente clienteBusca;
-        clienteBusca = new Cliente();
         List<Conta> contaBusca;
         contaBusca = new ArrayList<>();
         for (int i = 0; i < agencias.size(); i++) {
@@ -95,10 +90,10 @@ public class Banco {
 
         }
         if (!contaBusca.isEmpty()) {
-            clienteBusca = contaBusca.get(0).getCliente();
+            clienteBusca = contaBusca.get(0).getCliente(0);
         }
 
-        return clienteBusca;
+        return clienteBusca; // rearranjo List
     }
 
 }

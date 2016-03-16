@@ -12,22 +12,24 @@ import java.util.ArrayList;
 public class Cliente {
    
    // declaração de atributos
-     private String rg;
+     private String rg; /* Pagamento (boleto: com data e valor), contas conjuntas, classe teste */  
      private String nome;
-     private double limite;
+     
      private short idade;
     //construtor com inicialização de dados para ser usado na criação da conta
     public Cliente( String rg, String nome, double saldo, double limite, short idade){
+        this.idade = 0;
         this.rg = rg;
         this.nome = nome;
-        this.limite = limite;
+        
         this.idade = idade;   
     }
     //construtor de teste ou outros fins
     public Cliente(){
+        this.idade = 0;
         this.rg = rg;
         this.nome = nome;
-        this.limite = limite;
+        
         this.idade = idade; 
     }
     //métodos acessores
@@ -37,9 +39,7 @@ public class Cliente {
     public String getNome(){
         return this.nome;
     }
-    public double getLimite(){
-        return this.limite;
-    }
+    
     public short getIdade(){
         return this.idade;
     }
@@ -50,9 +50,7 @@ public class Cliente {
     public void setNome(String nome){
         this.nome = nome;
     }
-    public void setLimite( double limite){
-        this.limite = limite;
-    }
+    
     public void setIdade( short idade){
         this.idade = idade;
     }
