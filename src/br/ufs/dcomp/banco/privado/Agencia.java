@@ -9,26 +9,27 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- *
+ * Classe que molda operações da classe Agência
  * @author Fillipe Paz
  */
 public class Agencia {
 
     private int codigoConta = 1;
     private int codigo; // Será gerado na classe banco;
-    private List<Conta> contas; // necessariamente uma agência precisa começar com uma conta?
+    private List<Conta> contas; // Uma lista com vários objetos contas do tipo Conta foi declarada
     // isso traz implicações diretas no construtor
 
+    /** Construtor que inicializa o código da agência através da classe Banco.
+    */
     public Agencia(int codigo) {
 
-        contas = new ArrayList<>();
+        contas = new ArrayList<>(); // Um arraylist com objetos do tipo Conta
 
-        /* crio a conta para o pagamento de faturas?
-         um possibilidade é criar 1 Cliente cliente nessa classe que só vai ser útil para esse fim
-         - tópico: pagamento de contas
-         */
     }
-
+    /** Método para captar o Montante de somente uma agência. 
+     * O montante é dado pela soma dos saldos das diversas contas de uma agência.
+    * @return double montanteAgencia
+    */
     public double getMontanteAgencia() {
         double montanteAgencia = 0;
 
@@ -37,7 +38,10 @@ public class Agencia {
         }
         return montanteAgencia;
     }
-
+    /**  Método para captar o saldo de um cliente em uma agência de acordo com o RG.
+    * @ param String rg
+    * @return double saldoNaAgencia
+    */
     public double getSaldoCliente(String rg) {
         double saldoNaAgencia = 0;
 
@@ -50,7 +54,10 @@ public class Agencia {
 
         return saldoNaAgencia;
     }
-
+    /** Método para buscar contas através do rg do cliente. 
+    *  @param String rt
+    * @return List contasBusca 
+    */
     public List buscarConta(String rg) {
         List<Conta> contasBusca;
         contasBusca = new ArrayList<>();
@@ -63,7 +70,8 @@ public class Agencia {
         return contasBusca;
 
     }
-
+    /** Método para buscar conta de uma cliente a partir do código da conta em específico.
+    */
     protected List buscarConta(int codigo) { // Saber a agência onde está a conta é fundamental.
         List<Conta> contasBusca;
         contasBusca = new ArrayList<>();
@@ -82,13 +90,21 @@ public class Agencia {
     protected List getContas() {
         return contas;
     }
-
+    /** Método para criar uma conta através da classe agência, que reparassará os parâmetros para a classe Conta.
+     * Para cada conta criada um código da conta na agência é incrementado.
+     * @param Cliente cliente
+     * @param double limite
+     * @param double saldo
+    */
     public void criarConta(Cliente cliente, double limite, double saldo) {
         Conta conta = new Conta(saldo, cliente, limite, codigo);
         contas.add(conta);
         this.codigoConta++;
     }
-
+    /** Método para relacionar dois códigos de uma conta a um único cliente.
+     * @param Cliente cliente
+     * @param int código
+    */
     public void atrelarCliente(Cliente cliente, int codigo) {
         List<Conta> conta;
         conta = new ArrayList<>();
