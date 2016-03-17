@@ -94,6 +94,31 @@ public class Extrato {
         this.datas.add(getDate());
     }
     
+    public List getOperacoes()
+    {
+        return operacoes;
+    }
+    
+    public List getNomeDestino()
+    {
+        return nomeDestino;
+    }
+    
+    public List getDatas()
+    {
+        return datas;
+    }
+    
+    public List getQuantia()
+    {
+        return quantia;
+    }
+    
+    public List getSaldoAnterior()
+    {
+        return saldoAnterior;
+    }
+    
     
     
 

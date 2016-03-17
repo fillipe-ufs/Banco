@@ -23,9 +23,11 @@ public class AppBanco {
     public static void main(String[] args) {
         short opcao = 0;
         Scanner entrada = new Scanner(System.in);
+        List <Conta> conta1 = new ArrayList<>();
         List <Cliente> cliente1 = new ArrayList<>();
         List <Banco> banco1 = new ArrayList<>();
         List <Agencia> agencia1 = new ArrayList<>(); // Podem ser usados construtores também.
+        
         
         System.out.println("Digite:");
         System.out.println("1 - Para gestão auditoria ");
@@ -38,17 +40,18 @@ public class AppBanco {
         switch(opcao)
         {
             case 1:
-                MenuAuditoria auditoria = new MenuAuditoria();
+                MenuAuditoria auditoria = new MenuAuditoria(banco1, agencia1, conta1);
                 break;
             case 2: 
                 MenuAgencia agencia = new MenuAgencia();
                 break;
             case 4:
                 
-                MenuBanco banco = new MenuBanco();
+                MenuBanco banco = new MenuBanco(banco1, agencia1, conta1);
                 break;
             case 3: 
-                MenuCaixa caixa = new MenuCaixa();
+                MenuCaixa caixa = new MenuCaixa(conta1, cliente1, agencia1, banco1);
+                
                 break;
         }
     }
