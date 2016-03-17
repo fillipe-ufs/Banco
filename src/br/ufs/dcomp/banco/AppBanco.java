@@ -17,6 +17,8 @@ import java.util.Scanner;
 
 public class AppBanco {
 
+
+    // criar lists aqui para captar o método criar banco
     /**
      * @param args the command line arguments
      */
@@ -56,4 +58,9 @@ public class AppBanco {
         }
     }
     
+    public void cadastrarBanco(String sigla, String nome){
+        Banco banco = new Banco(sigla, nome);
+        bancos = new ArrayList<>();
+        bancos.add(banco);
+    }
 }
