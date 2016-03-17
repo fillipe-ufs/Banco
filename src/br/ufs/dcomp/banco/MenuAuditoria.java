@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.ufs.dcomp.banco;
 
 import br.ufs.dcomp.banco.privado.*;
@@ -60,18 +54,26 @@ public class MenuAuditoria {
                 numeroBanco = ler.nextInt();
                 for( int i = 0; i < auditoria.bancos.size();i++){
                     if(numeroBanco == auditoria.bancos.get(i).getCodigo())
-                        contadorBanco = i;
                         System.out.println(" Montante do banco:" + auditoria.bancos.get(i).getMontante());
                 }
                 System.out.println(" Gostaria de verificar o montante de uma agência deste banco?"
-                                    + " Responda 'sim' ou 'não'");
-                String resposta = ler.next();
-                if( resposta.equals("sim")){
+                                    + " Responda 1 para sim ou 0  para não. ");
+                int resposta = ler.nextInt();
+                if( resposta == 1){
                     System.out.println(" Digite o número da agência:");
                     numeroAgencia = ler.nextInt();
+                    auditoria.bancos.get()
                     
                     }
                     
-                }
-                 
-      
+                break;
+            case 4 :
+                
+                
+            case 5 :
+                
+            case 6 :
+            
+        }
+    }
+}
