@@ -18,7 +18,8 @@ import java.util.Scanner;
 public class AppBanco {
 
 
-    // criar lists aqui para captar o método criar banco
+    List <Banco> bancos =  new ArrayList<>();
+    List <Agencia> agencias = new ArrayList<>();
     /**
      * @param args the command line arguments
      */
@@ -27,15 +28,14 @@ public class AppBanco {
         Scanner entrada = new Scanner(System.in);
         List <Conta> conta1 = new ArrayList<>();
         List <Cliente> cliente1 = new ArrayList<>();
-        List <Banco> banco1 = new ArrayList<>();
-        List <Agencia> agencia1 = new ArrayList<>(); // Podem ser usados construtores também.
+        //List <Banco> banco1 = new ArrayList<>();
+        //List <Agencia> agencia1 = new ArrayList<>(); // Podem ser usados construtores também.
         
         
         System.out.println("Digite:");
         System.out.println("1 - Para gestão auditoria ");
-        System.out.println("2 - Para gestão de agência");
         System.out.println("3 - Para Caixa Eletrônico");
-        System.out.println("4 - Para gestão de Banco");
+     
         
         opcao = entrada.nextShort();
         
@@ -43,13 +43,6 @@ public class AppBanco {
         {
             case 1:
                 MenuAuditoria auditoria = new MenuAuditoria(banco1, agencia1, conta1);
-                break;
-            case 2: 
-                MenuAgencia agencia = new MenuAgencia();
-                break;
-            case 4:
-                
-                MenuBanco banco = new MenuBanco(banco1, agencia1, conta1);
                 break;
             case 3: 
                 MenuCaixa caixa = new MenuCaixa(conta1, cliente1, agencia1, banco1);
