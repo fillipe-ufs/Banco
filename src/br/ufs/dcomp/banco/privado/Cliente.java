@@ -16,14 +16,14 @@ public class Cliente {
      private short idade;
      
     /** Construtor com inicialização de dados para ser como teste. */
-    public Cliente( String rg, String nome, double saldo, short idade){
+     protected Cliente( String rg, String nome, short idade){
         this.idade = idade;
         this.rg = rg;
         this.nome = nome;
         this.idade = idade;   
     }
     /** Construtor de teste para ser inicializado via usuário. */
-    public Cliente(){
+    protected Cliente(){
         this.idade = idade;
         this.rg = rg;
         this.nome = nome;

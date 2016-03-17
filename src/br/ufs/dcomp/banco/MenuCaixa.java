@@ -16,27 +16,27 @@ import java.util.Scanner;
  */
 public class MenuCaixa {
 
-    private static List<Conta> contas;
-    private static List<Cliente> clientes;
-    private static List<Banco> bancos;
-    private static List<Agencia> agencias;
+    private  List<Conta> contas;
+    private  List<Cliente> clientes;
+    private  List<Banco> bancos;
+    private  List<Agencia> agencias;
 
     public MenuCaixa(List contas, List clientes, List agencias, List bancos) {
-        MenuCaixa.contas = new ArrayList<>();
-        MenuCaixa.bancos = new ArrayList<>();
-        MenuCaixa.clientes = new ArrayList<>();
-        MenuCaixa.agencias = new ArrayList<>();
-        MenuCaixa.contas = contas;
-        MenuCaixa.bancos = bancos;
-        MenuCaixa.agencias = agencias;
-        MenuCaixa.clientes = clientes;
+        this.contas = new ArrayList<>();
+        this.bancos = new ArrayList<>();
+        this.clientes = new ArrayList<>();
+        this.agencias = new ArrayList<>();
+        this.contas = contas;
+        this.bancos = bancos;
+        this.agencias = agencias;
+        this.clientes = clientes;
 
     }
 
-    public MenuCaixa() {
-    }
 
-    public static void main(String[] args) {
+    public void menuPrincipal()
+    {
+    
 
         Scanner entrada = new Scanner(System.in);
         short opcao;
@@ -48,10 +48,10 @@ public class MenuCaixa {
         int codigoContaDestino;
         double quantia;
         String codigoBoleto;
-        MenuCaixa caixa = new MenuCaixa();
         
 
-        do {
+        
+do {
             System.out.println("Digite o código do seu Banco");
             codigoBanco = entrada.nextInt();
             System.out.println("Digite o código da sua agência: ");
@@ -73,7 +73,7 @@ public class MenuCaixa {
 
                     System.out.println("Digite a quantia");
                     quantia = entrada.nextDouble();
-                    caixa.sacar(codigoAgencia, codigoBanco, codigoConta, quantia);
+                    sacar(codigoAgencia, codigoBanco, codigoConta, quantia);
 
                     break;
 
@@ -83,12 +83,12 @@ public class MenuCaixa {
                     codigoBoleto = entrada.next();
                     System.out.println("Digite a quantia");
                     quantia = entrada.nextDouble();
-                    caixa.realizarPagamento(codigoAgencia, codigoBanco, codigoConta, quantia, codigoBoleto);
+                    realizarPagamento(codigoAgencia, codigoBanco, codigoConta, quantia, codigoBoleto);
                     break;
 
                 case 3:
 
-                    caixa.obterExtrato(codigoAgencia, codigoBanco, codigoConta);
+                    obterExtrato(codigoAgencia, codigoBanco, codigoConta);
                     break;
 
                 case 4:
@@ -101,7 +101,7 @@ public class MenuCaixa {
                     codigoContaDestino = entrada.nextInt();
                     System.out.println("Digite a quantia");
                     quantia = entrada.nextDouble();
-                    caixa.transferencia(codigoAgencia, codigoBanco, codigoConta, quantia, codigoAgenciaDestino, codigoBancoDestino, codigoContaDestino);
+                    transferencia(codigoAgencia, codigoBanco, codigoConta, quantia, codigoAgenciaDestino, codigoBancoDestino, codigoContaDestino);
 
                 case 5:
                     return; // Ele retorna para AppBanco? O importante é não perder as referências.
@@ -113,26 +113,30 @@ public class MenuCaixa {
     }
 
     public void sacar(int agenciaCod, int bancoCod, int contaCod, double quantia) {
-        List<Conta> conta = new ArrayList<>();
+
+        List<Conta> conta;
 
         for (int i = 0; i < this.bancos.size(); i++) {
             if (bancos.get(i).getCodigo() == bancoCod) {
                 conta = bancos.get(i).encontrarConta(agenciaCod, contaCod);
                 if (conta.isEmpty()) {
-                    System.out.println("Conta não localizada.");
+                    System.out.println("A conta não existe");
+                    break;
                 } else {
-                    conta.get(0).Sacar(quantia);
-                }
-            } else if (i == this.bancos.size() - 1) {
-                System.out.println("Banco não encontrado.");
-            }
-
-        }
-        if (conta.get(0).Sacar(quantia) == true) {
+                    if (conta.get(0).Sacar(quantia) == true) {
             System.out.println("Operação realizada com sucesso.");
         } else {
             System.out.println("Ocorreu um erro.");
         }
+                }
+            } else if (i == this.bancos.size() - 1) {
+                System.out.println("Banco não encontrado.");
+                break;
+            }
+
+        }
+
+       
     }
 
     public void transferencia(int agenciaCod, int bancoCod, int contaCod, double quantia, int agenciaCodDestino, int bancoCodDestino, int contaCodDestino) {

@@ -21,7 +21,7 @@ public class Conta {
     /**
      * Construtor inicializado para instanciação de uma conta associada a um cliente.
      */
-    public Conta(double saldo, Cliente cliente, double limite, int codigo) {
+    protected Conta(double saldo, Cliente cliente, double limite, int codigo) {
 
         this.cliente = new ArrayList<>(); // O cliente vai para a lista do tipo Cliente.
 
@@ -162,6 +162,11 @@ public class Conta {
 
     public List getCliente() {
         return cliente;
+    }
+    
+    public void adicionarCliente(Cliente cliente)
+    {
+        this.cliente.add(cliente);
     }
 
     public int getCodigo() {
