@@ -13,11 +13,11 @@ public class Cliente {
    //declaração de atributos do Cliente
      private String rg; /* Pagamento (boleto: com data e valor), contas conjuntas, classe teste */  
      private String nome;
-     private short idade;
+     private int idade;
      
     /** Construtor com inicialização de dados para ser como teste. */
-     protected Cliente( String rg, String nome, short idade){
-        this.idade = idade;
+     protected Cliente( String rg, String nome, int idade){
+         
         this.rg = rg;
         this.nome = nome;
         this.idade = idade;   
@@ -37,7 +37,7 @@ public class Cliente {
         return this.nome;
     }
     
-    public short getIdade(){
+    public int getIdade(){
         return this.idade;
     }
     // métodos modificadores
@@ -48,7 +48,7 @@ public class Cliente {
         this.nome = nome;
     }
     
-    public void setIdade( short idade){
+    public void setIdade( int idade){
         this.idade = idade;
     }
     /** Verifica e valida o número de RG digitado pelo usuário.
@@ -72,7 +72,7 @@ public class Cliente {
     /** Verifica a idade do usuário.
       @param short idade
       @return boolean valorIdade - retorna true se o cliente for maior de 16 anos. */
-    protected boolean verificaIdade( short idade){
+    protected boolean verificaIdade( int idade){
         boolean valorIdade = true;
         if( idade < 16){
             System.out.println(" Criação de contas somente para maior de 16 anos!");

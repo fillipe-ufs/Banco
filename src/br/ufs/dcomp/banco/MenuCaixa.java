@@ -16,21 +16,15 @@ import java.util.Scanner;
  */
 public class MenuCaixa {
 
-    private  List<Conta> contas;
-    private  List<Cliente> clientes;
+    
     private  List<Banco> bancos;
-    private  List<Agencia> agencias;
+   
 
-    public MenuCaixa(List contas, List clientes, List agencias, List bancos) {
-        this.contas = new ArrayList<>();
+    public MenuCaixa(List bancos) {
+        
         this.bancos = new ArrayList<>();
-        this.clientes = new ArrayList<>();
-        this.agencias = new ArrayList<>();
-        this.contas = contas;
         this.bancos = bancos;
-        this.agencias = agencias;
-        this.clientes = clientes;
-
+       
     }
 
 

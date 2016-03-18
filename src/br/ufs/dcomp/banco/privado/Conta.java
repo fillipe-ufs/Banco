@@ -21,13 +21,13 @@ public class Conta {
     /**
      * Construtor inicializado para instanciação de uma conta associada a um cliente.
      */
-    protected Conta(double saldo, Cliente cliente, double limite, int codigo) {
+    protected Conta(double saldo,  double limite, int codigo, Cliente cliente) {
 
         this.cliente = new ArrayList<>(); // O cliente vai para a lista do tipo Cliente.
-
+        this.cliente.add(cliente);
         extrato = new Extrato();
         this.saldo = saldo;
-        this.cliente.add(cliente); // Conta conjunta possível
+         // Conta conjunta possível
         this.limite = limite;
         this.codigo = codigo;
     }
@@ -72,21 +72,19 @@ public class Conta {
      * @return boolean true ou false
      */
     public boolean RealizarPagamento(Double quantia, String codigo) {
+        
+        if(quantia<0)
+        {
+            System.out.println("Quantia inválida");
+            return false;
+        }
 
         if (quantia > (limite + saldo)) {
             System.out.println("Valor solicitado ultrapassa limite disponível.");
             return false;
         } else {
-            extrato.guardarPagamento(saldo + limite, quantia, codigo);
-            if (saldo <= 0) {
-                limite = limite - quantia;
-            } else if (quantia > saldo) {
-                quantia = quantia - saldo;
-                saldo = 0;
-                limite = limite - quantia;
-            } else if (saldo >= quantia) {
-                saldo = saldo - quantia;
-            }
+            extrato.guardarPagamento(saldo, quantia, codigo);
+            saldo = saldo - quantia;
 
         }
 
@@ -104,6 +102,12 @@ public class Conta {
      * @param double quantia
      */
     public boolean transferir(Conta contaDestino, double quantia) {
+        
+        if(quantia<0)
+        {
+            System.out.println("Quantia inválida");
+            return false;
+        }
 
         if (quantia > (saldo + limite)) {
             System.out.println("A transferência não pode ser concluída, pois a quantia ultrapassa o valor disponível para o cliente");
@@ -184,6 +188,10 @@ public class Conta {
     public void setSaldo(double saldo) {
         this.saldo = saldo; // Foi necessário para inserir informações no extrato de um cliente externo após 
         // transferência.
+        
+        
     }
+    
+    
 
 }

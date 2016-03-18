@@ -22,6 +22,7 @@ public class Agencia {
 
     /**
      * Construtor que inicializa o código da agência através da classe Banco.
+     *
      * @param codigo
      */
     protected Agencia(int codigo) {
@@ -68,43 +69,46 @@ public class Agencia {
     /**
      * Método para buscar contas através do rg do cliente.
      *
-     * @param  rg
-     * @return  contasBusca
+     * @param rg
+     * @return contasBusca
      */
     public List buscarConta(String rg) {
         List<Conta> contasBusca;
         contasBusca = new ArrayList<>();
         for (Conta conta : this.contas) {
             if (!conta.buscarCliente(rg).isEmpty()) {
-                
+
                 contasBusca.add(conta);
             }
         }
         return contasBusca;
-
     }
 
     /**
      * Método para buscar conta de uma cliente a partir do código da conta em
      * específico.
      */
-    protected List  buscarConta(int codigo) { // Saber a agência onde está a conta é fundamental.
-        List <Conta> contas = new ArrayList<>();
+    protected List buscarConta(int codigo) { // Saber a agência onde está a conta é fundamental.
+        List<Conta> contas = new ArrayList<>();
         for (int i = 0; i < this.contas.size(); i++) {
             if (codigo == this.contas.get(i).getCodigo()) {
-                 contas.add(this.contas.get(i));
+                contas.add(this.contas.get(i));
             }
         }
         return contas;
-         // Validação necessária no módulo principal. Se a lista estiver vazia, logo a conta buscada não existe.
+        // Validação necessária no módulo principal. Se a lista estiver vazia, logo a conta buscada não existe.
     }
 
     public int getCodigo() {
         return codigo;
     }
 
-    protected List getContas() {
+    public <Conta> List getContas() {
         return contas;
+    }
+
+    public Conta getContas(int codigo) {
+        return this.contas.get(codigo);
     }
 
     /**
@@ -116,51 +120,22 @@ public class Agencia {
      * @param double limite
      * @param double saldo
      */
-    public void criarConta(Cliente cliente, double limite, double saldo) {
-        Conta conta = new Conta(saldo, cliente, limite, codigo);
+    public void criarConta(double limite, double saldo, Cliente cliente) {
+        Conta conta = new Conta(saldo, limite, codigo, cliente);
         contas.add(conta);
         this.codigoConta++;
     }
 
-    /**
-     * Método para cadastrar um cliente e atrelá-lo a uma conta. O parâmetro código refere-se à conta.
-     *
-     * @param  rg 
-     * @param  nome
-     * @param  idade
-     * @param  codigo
-     */
-    
-
-    public void cadastroCliente(String rg, String nome, short idade, int codigo) {
-        List conta;
-        Cliente cliente = new Cliente(rg, nome, idade);
+    public boolean atrelarAConta(int codigo, Cliente cliente) {
+        List<Conta> conta;
         conta = buscarConta(codigo);
-        if (buscarConta(codigo).isEmpty()) {
-            System.out.println("Conta não encontrada");
+        if (conta.isEmpty()) {
+            return false;
         } else {
-            this.contas.get(this.contas.indexOf(conta.get(0))).adicionarCliente(cliente);
-            System.out.println("Operação realizada com sucesso");
+            conta.get(0).adicionarCliente(cliente);
+            return true;
         }
 
     }
-    
-    /**
-     * Método para cadastrar um cliente e atrelá-lo a uma conta. O parâmetro código refere-se à conta.
-     *
-     * @param  cliente
-     * @param codigo
-     */
-    
-    public void cadastroCliente(Cliente cliente, int codigo) {
-        List conta;
-        conta = buscarConta(codigo);
-        if (buscarConta(codigo).isEmpty()) {
-            System.out.println("Conta não encontrada");
-        } else {
-            this.contas.get(this.contas.indexOf(conta.get(0))).adicionarCliente(cliente);
-            System.out.println("Operação realizada com sucesso");
-        }
 
-    }
 }

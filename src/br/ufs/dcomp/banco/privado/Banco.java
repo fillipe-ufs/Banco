@@ -15,6 +15,7 @@ public class Banco {
     private int codigoAgencias = 0;
     private int codigo;
     private String sigla;
+    private List<Cliente> clientes;
     private String nome;
     private double montante;
     private List<Agencia> agencias;
@@ -27,6 +28,7 @@ public class Banco {
         this.sigla = sigla;
         agencias = new ArrayList<>();
         codigo = codigoBancos;
+        clientes = new ArrayList<>();
         incrementarCodigoBancos();
     }
 
@@ -69,16 +71,18 @@ public class Banco {
     public double getSaldoCliente(String rg) {
         double saldoCliente = 0;
         if (Cliente.verificaRG(rg) == false) {
-            return 0;
+
         }
         List<Conta> contas;
         contas = new ArrayList<>();
-        for (Agencia agencia : agencias) {
-            if (!agencia.buscarConta(rg).isEmpty()) {
-                contas = agencia.buscarConta(rg);
-                for (Conta conta : contas) {
-                    saldoCliente = saldoCliente + conta.getSaldo();
+        for (int i = 0; i < agencias.size(); i++) {
+            if (!agencias.get(i).buscarConta(rg).isEmpty()) {
+                contas = agencias.get(i).buscarConta(rg);
+                for (int j = 0; j < contas.size(); j++) {
+                    saldoCliente = saldoCliente + contas.get(j).getSaldo();
+
                 }
+
             }
 
         }
@@ -141,16 +145,37 @@ public class Banco {
     }
 
     public Agencia getAgencia(int codigo) {
-        int posicao = 0;
-        for (int i = 0; i < agencias.size(); i++) {
-            if (agencias.get(i).getCodigo() == codigo) {
-                posicao = i;
 
+        return agencias.get(codigo);
+    }
+
+    public List getClientes() {
+        return clientes;
+    }
+
+    public Cliente procurarCliente(String rg) {
+        for (int i = 0; i < getClientes().size(); i++) {
+
+            if (clientes.get(i).getRG().equals(rg) == true) {
+                return clientes.get(i);
             }
-            if(i == agencias.size()-1)
-                System.out.println("Agência não encontrada");
+
         }
-        return agencias.get(posicao);
+        return null;
+    }
+
+    public Cliente cadastrarCliente(String nome, String rg, int idade) {
+
+        Cliente cliente;
+        if (procurarCliente(rg) == null) {
+            cliente = new Cliente(rg, nome, idade);
+            clientes.add(cliente);
+            return cliente;
+
+        } else {
+            return procurarCliente(rg);
+        }
+
     }
 
 }
