@@ -11,7 +11,6 @@ import java.util.ArrayList;
 public class Conta {
 
     // Declaração de atributos e instanciação de objetos.
-
     private List<Cliente> cliente; // Somente objetos do tipo Cliente podem adicionados à lista de clientes.
     private Extrato extrato; // criação de um atributo do tipo extrato para cada conta
     private double saldo;
@@ -19,15 +18,16 @@ public class Conta {
     private int codigo; // Precisa ser modificado de modo a zerar de agência para agência.
 
     /**
-     * Construtor inicializado para instanciação de uma conta associada a um cliente.
+     * Construtor inicializado para instanciação de uma conta associada a um
+     * cliente.
      */
-    protected Conta(double saldo,  double limite, int codigo, Cliente cliente) {
+    protected Conta(double saldo, double limite, int codigo, Cliente cliente) {
 
         this.cliente = new ArrayList<>(); // O cliente vai para a lista do tipo Cliente.
         this.cliente.add(cliente);
         extrato = new Extrato();
         this.saldo = saldo;
-         // Conta conjunta possível
+        // Conta conjunta possível
         this.limite = limite;
         this.codigo = codigo;
     }
@@ -36,24 +36,20 @@ public class Conta {
      * Método para sacar uma quantia da conta. Caso o valor pedido seja maior
      * que o existente na conta, não é permitido o saque.
      *
-     * @param double quantia
-     * @return boolean true ou false
+     * @param quantia - double
+     * @return boolean 
      */
-    public boolean Sacar(double quantia) {
+    public boolean sacar(double quantia) {
 
+        if (quantia < 0) {
+            System.out.println("A quantia informada é inválida");
+            return false;
+        }
         if (quantia > (limite + saldo)) {
             System.out.println("Valor solicitado ultrapassa limite disponível.");
             return false;
         } else {
-            if (saldo <= 0) {
-                limite = limite - quantia;
-            } else if (quantia > saldo) {
-                quantia = quantia - saldo;
-                saldo = 0;
-                limite = limite - quantia;
-            } else if (saldo >= quantia) {
-                saldo = saldo - quantia;
-            }
+            saldo = saldo - quantia;
 
             extrato.guardarSaque(this.saldo + this.limite, quantia); // chama-se o método guardarSaque para guardar o valor do saldo inicial e final
             return true;                                             // em extrato
@@ -67,14 +63,13 @@ public class Conta {
      * Caso o valor existente seja menor que o valor do pagamento uma mensagem é
      * retornada.
      *
-     * @param Double quantia
-     * @param String codigo
+     * @param quantia Double
+     * @param codigo String 
      * @return boolean true ou false
      */
-    public boolean RealizarPagamento(Double quantia, String codigo) {
-        
-        if(quantia<0)
-        {
+    public boolean realizarPagamento(Double quantia, String codigo) {
+
+        if (quantia < 0) {
             System.out.println("Quantia inválida");
             return false;
         }
@@ -98,13 +93,13 @@ public class Conta {
     /**
      * Método para transferência de valores entre contas.
      *
-     * @param Conta contaDestino - Conta cuja quantia será enviada.
-     * @param double quantia
+     * @param contaDestino - Tipo Conta
+     * @param quantia - tipo double
+     * @return boolean
      */
     public boolean transferir(Conta contaDestino, double quantia) {
-        
-        if(quantia<0)
-        {
+
+        if (quantia < 0) {
             System.out.println("Quantia inválida");
             return false;
         }
@@ -123,12 +118,9 @@ public class Conta {
 
     /**
      * Metodo para geração de um extrato das operações de uma conta.
-     *
-     * @ return Extrato extrato
+     * @return Extrato - extrato
      */
     public Extrato gerarExtrato() {
-        //Dúvida: Carol, fazer o print das informações no método ou enviá-lo para o AppBanco? Estou em
-        //dúvida se é possível exibir lá sem a necessidade de instanciar um objeto do tipo Extrato.
         return extrato;
 
     }
@@ -138,7 +130,7 @@ public class Conta {
      * cliente, de qualquer agência e considera que um cliente pode ter mais de
      * uma conta.
      *
-     * @param String rg
+     * @param rg - String
      * @return List clienteBusca
      */
     public List buscarCliente(String rg) {
@@ -149,6 +141,7 @@ public class Conta {
         for (int i = 0; i < cliente.size(); i++) {
 
             if (Cliente.verificaRG(rg) == false) {
+                System.out.println("RG inválido");
                 break;
 
             } else {
@@ -156,8 +149,7 @@ public class Conta {
                     clienteBusca.add(cliente.get(i));
                 } else {
                     continue;
-                } // O acoplamento foi afetado com essa nova solução.
-
+                } 
             }
 
         }
@@ -167,9 +159,8 @@ public class Conta {
     public List getCliente() {
         return cliente;
     }
-    
-    public void adicionarCliente(Cliente cliente)
-    {
+
+    public void adicionarCliente(Cliente cliente) {
         this.cliente.add(cliente);
     }
 
@@ -186,12 +177,8 @@ public class Conta {
     }
 
     public void setSaldo(double saldo) {
-        this.saldo = saldo; // Foi necessário para inserir informações no extrato de um cliente externo após 
-        // transferência.
-        
-        
+        this.saldo = saldo; 
+
     }
-    
-    
 
 }

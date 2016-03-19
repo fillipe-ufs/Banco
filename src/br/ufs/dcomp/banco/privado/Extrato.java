@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- *
+ * Classe que molda as operações relacionadas ao extrato.
  * @author Fillipe Paz
  */
 public class Extrato {
@@ -42,7 +42,11 @@ public class Extrato {
     private String setOperacao(String operador) {
         return operador;
     }
-
+    /** Método para guardar dados de transferencias bancarias.
+     * @param saldoAnterior - double
+     * @param quantia - double
+     * @param contaDestino - Conta
+     */
     public void guardarTransferencia(Double saldoAnterior, Double quantia, Conta contaDestino) {
 
         List <Cliente> cliente = new ArrayList<>();
@@ -53,7 +57,10 @@ public class Extrato {
         this.nomeDestino.add(cliente.get(0).getNome());
         this.datas.add(getDate());
     }
-
+    /** Metodo para guardar dados de Saques.
+     * @param saldoAnterior - double
+     * @param quantia - double
+     */
     public void guardarSaque(Double saldoAnterior, Double quantia) {
         this.operacoes.add(setOperacao("Saque (-)"));
         this.saldoAnterior.add(saldoAnterior);
@@ -61,7 +68,10 @@ public class Extrato {
         this.nomeDestino.add("Saque"); // Não precisa exibir
         this.datas.add(getDate());
     }
-
+    /** Metodo para receber depósito.
+     * @param contaDestino
+     * @param quantia
+     */
     public void receberDeposito(Conta contaDestino, Double quantia) {
         this.operacoes.add(setOperacao("Depósito ATM (+)"));
         this.saldoAnterior.add(contaDestino.getSaldo());
@@ -70,7 +80,11 @@ public class Extrato {
         this.datas.add(getDate());
 
     }
-    
+    /** Metodo para guardar informações no extrato referente a conta de destino.
+     * @param quantia - double
+     * @param contaDestino -  - String
+     * @param nomeContaOrigem
+     */
     public void guardarTransferenciaContaDestino(Double quantia, Conta contaDestino, String nomeContaOrigem) {
 
         
@@ -80,12 +94,13 @@ public class Extrato {
         this.nomeDestino.add(nomeContaOrigem);
         this.datas.add(getDate());
         
-        
-        
-        
-        //Objetivo: Colocar os valores no extrato da outra conta.
+       
     }
-    
+    /** Metodo para guardar informações de pagamento.
+     * @param saldoAnterior - double
+     * @param quantia - double
+     * @param codigo - codigo do  - String
+     */
     public void guardarPagamento(Double saldoAnterior, Double quantia, String codigo) {
         this.operacoes.add(setOperacao("Pagamento (-)"));
         this.saldoAnterior.add(saldoAnterior);

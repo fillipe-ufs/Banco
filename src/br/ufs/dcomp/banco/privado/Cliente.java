@@ -5,13 +5,13 @@ import java.util.ArrayList;
 
 /** Classe para captar informações básicas de um cliente de um cliente
  *@since 11/03/2016
- * @author Carol e Fillipe Paz 
+ * @author Carolina Louzada e Fillipe Paz 
  */
 
 public class Cliente {
    
    //declaração de atributos do Cliente
-     private String rg; /* Pagamento (boleto: com data e valor), contas conjuntas, classe teste */  
+     private String rg;  
      private String nome;
      private int idade;
      
@@ -52,7 +52,7 @@ public class Cliente {
         this.idade = idade;
     }
     /** Verifica e valida o número de RG digitado pelo usuário.
-     * @param  String rg
+     * @param rg - String
      * @return boolean valorRG - Retorna true caso o usuário tenha digitado somente números.
     */
     protected static boolean verificaRG(String rg){
@@ -70,8 +70,8 @@ public class Cliente {
            return valorRG;
     }
     /** Verifica a idade do usuário.
-      @param short idade
-      @return boolean valorIdade - retorna true se o cliente for maior de 16 anos. */
+      @param idade - int
+      @return boolean - valorIdade - retorna true se o cliente for maior de 16 anos. */
     protected boolean verificaIdade( int idade){
         boolean valorIdade = true;
         if( idade < 16){

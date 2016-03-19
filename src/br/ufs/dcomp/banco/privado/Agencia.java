@@ -9,16 +9,15 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Classe que molda operações da classe Agência
+ * Classe que molda operações da classe Agencia
  *
  * @author Fillipe Paz
  */
 public class Agencia {
 
-    private int codigoConta = 1;
+    private int codigoConta;
     private int codigo; // Será gerado na classe banco;
-    private List<Conta> contas; // Uma lista com vários objetos contas do tipo Conta foi declarada
-    // isso traz implicações diretas no construtor
+    private List<Conta> contas;
 
     /**
      * Construtor que inicializa o código da agência através da classe Banco.
@@ -27,8 +26,9 @@ public class Agencia {
      */
     protected Agencia(int codigo) {
 
-        contas = new ArrayList<>(); // Um arraylist com objetos do tipo Conta
+        contas = new ArrayList<>();
         this.codigo = codigo;
+        codigoConta = 0;
     }
 
     /**
@@ -40,9 +40,10 @@ public class Agencia {
     public double getMontanteAgencia() {
         double montanteAgencia = 0;
 
-        for (Conta conta : contas) {
-            montanteAgencia = montanteAgencia + conta.getSaldo();
+        for (int i = 0; i < contas.size(); i++) {
+            montanteAgencia = montanteAgencia + contas.get(i).getSaldo();
         }
+
         return montanteAgencia;
     }
 
@@ -50,17 +51,18 @@ public class Agencia {
      * Método para captar o saldo de um cliente em uma agência de acordo com o
      * RG.
      *
-     * @ param String rg
+     * @param rg - String
      * @return double saldoNaAgencia
      */
     public double getSaldoCliente(String rg) {
         double saldoNaAgencia = 0;
 
-        for (Conta conta : contas) {
-            if (!conta.buscarCliente(rg).isEmpty()) { // rearranjo List
-                saldoNaAgencia = saldoNaAgencia + conta.getSaldo();
+        for (int i = 0; i < contas.size(); i++) {
 
+            if (!contas.get(i).buscarCliente(rg).isEmpty()) {
+                saldoNaAgencia = saldoNaAgencia + contas.get(i).getSaldo();
             }
+
         }
 
         return saldoNaAgencia;
@@ -70,29 +72,36 @@ public class Agencia {
      * Método para buscar contas através do rg do cliente.
      *
      * @param rg
-     * @return contasBusca
+     * @return List - contasBusca
      */
     public List buscarConta(String rg) {
         List<Conta> contasBusca;
         contasBusca = new ArrayList<>();
-        for (Conta conta : this.contas) {
-            if (!conta.buscarCliente(rg).isEmpty()) {
 
-                contasBusca.add(conta);
+        for (int i = 0; i < contas.size(); i++) {
+            if (!contas.get(i).buscarCliente(rg).isEmpty()) {
+
+                contasBusca.add(contas.get(i));
             }
+
         }
+
         return contasBusca;
     }
 
     /**
      * Método para buscar conta de uma cliente a partir do código da conta em
      * específico.
+     *
+     * @param codigo
+     * @return List - contas
      */
     protected List buscarConta(int codigo) { // Saber a agência onde está a conta é fundamental.
         List<Conta> contas = new ArrayList<>();
         for (int i = 0; i < this.contas.size(); i++) {
             if (codigo == this.contas.get(i).getCodigo()) {
                 contas.add(this.contas.get(i));
+                return contas;
             }
         }
         return contas;
@@ -107,8 +116,15 @@ public class Agencia {
         return contas;
     }
 
-    public Conta getContas(int codigo) {
-        return this.contas.get(codigo);
+    public Conta getConta(int codigo) {
+
+        for (int i = 0; i < contas.size(); i++) {
+            if (contas.get(i).getCodigo() == codigo) {
+                return contas.get(i);
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -116,16 +132,29 @@ public class Agencia {
      * parâmetros para a classe Conta. Para cada conta criada um código da conta
      * na agência é incrementado.
      *
-     * @param Cliente cliente
-     * @param double limite
-     * @param double saldo
+     * @param cliente Cliente
+     * @param limite double
+     * @param saldo double
+     * @return boolean
      */
-    public void criarConta(double limite, double saldo, Cliente cliente) {
-        Conta conta = new Conta(saldo, limite, codigo, cliente);
+    public boolean criarConta(double limite, double saldo, Cliente cliente) {
+        Conta conta = new Conta(saldo, limite, codigoConta, cliente);
         contas.add(conta);
-        this.codigoConta++;
+        incrementarCodigoConta();
+        return false;
     }
 
+    private void incrementarCodigoConta() {
+        codigoConta++;
+    }
+
+    /**
+     * Método para relacionar dois clientes numas mesma conta.
+     *
+     * @param codigo
+     * @param cliente
+     * @return boolean
+     */
     public boolean atrelarAConta(int codigo, Cliente cliente) {
         List<Conta> conta;
         conta = buscarConta(codigo);
@@ -136,6 +165,24 @@ public class Agencia {
             return true;
         }
 
+    }
+
+    /**
+     * Método para remover uma conta através do código.
+     *
+     * @param codigo - int
+     * @return boolean
+     */
+    public boolean removerConta(int codigo) {
+        Conta conta;
+
+        conta = getConta(codigo);
+        if (conta.getCliente().size() != 1) {
+            return false;
+        } else {
+            contas.remove(conta);
+        }
+        return true;
     }
 
 }

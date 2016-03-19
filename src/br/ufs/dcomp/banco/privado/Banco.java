@@ -12,7 +12,7 @@ public class Banco {
 
     // declaração de atributos e lista de agências.
     private static int codigoBancos;
-    private int codigoAgencias = 0;
+    private int codigoAgencias;
     private int codigo;
     private String sigla;
     private List<Cliente> clientes;
@@ -30,6 +30,7 @@ public class Banco {
         codigo = codigoBancos;
         clientes = new ArrayList<>();
         incrementarCodigoBancos();
+        codigoAgencias = 0;
     }
 
     /**
@@ -55,9 +56,10 @@ public class Banco {
      * @return double montante
      */
     public double getMontante() {
-        for (Agencia agencia : agencias) {
-            montante = agencia.getMontanteAgencia();
+        for (int i = 0; i < agencias.size(); i++) {
+            montante = montante + agencias.get(i).getMontanteAgencia();
         }
+
         return montante;
     }
 
@@ -65,8 +67,8 @@ public class Banco {
      * Método que retorna o saldo total do cliente de todas as agências daquele
      * banco através do número do RG.
      *
-     * @param String rg
-     * @return double saldoCliente
+     * @param rg - tipo String
+     * @return double - saldoCliente
      */
     public double getSaldoCliente(String rg) {
         double saldoCliente = 0;
@@ -100,8 +102,9 @@ public class Banco {
     /**
      * Método para encontrar contas determinadas de uma agência em específico.
      *
-     * @param int codAgencia
-     * @return codConta
+     * @param codAgencia - tipo int
+     * @param codConta - int
+     * @return List - contabuscada
      */
     public List encontrarConta(int codAgencia, int codConta) {
         List<Conta> contaBuscada;
@@ -109,14 +112,14 @@ public class Banco {
         for (int i = 0; i < agencias.size(); i++) {
             if (agencias.get(i).getCodigo() == codAgencia) {
                 contaBuscada = agencias.get(i).buscarConta(codConta);
+                break;
             }
             if (i == agencias.size() - 1) {
                 System.out.println("Agência não encontrada!");
             }
         }
 
-        return contaBuscada; // Tratamento de informação necessário. 
-        //Se a lista estiver vazia, logo a conta não existe. 
+        return contaBuscada;
     }
 
     /**
@@ -146,24 +149,44 @@ public class Banco {
 
     public Agencia getAgencia(int codigo) {
 
-        return agencias.get(codigo);
+        for (int i = 0; i < agencias.size(); i++) {
+            if (agencias.get(i).getCodigo() == codigo) {
+                return agencias.get(i);
+            }
+        }
+
+        return null;
     }
 
     public List getClientes() {
         return clientes;
     }
 
+    /**
+     * Método que procura um objeto cliente na lista pelo RG.
+     *
+     * @param rg - tipo String
+     * @return null
+     */
     public Cliente procurarCliente(String rg) {
         for (int i = 0; i < getClientes().size(); i++) {
 
             if (clientes.get(i).getRG().equals(rg) == true) {
                 return clientes.get(i);
             }
-
         }
         return null;
     }
 
+    /**
+     * Método para cadastrar um cliente. Se o cliente já estiver cadastrado pelo
+     * rg, ele chama o procurarCliente.
+     *
+     * @param nome - tipo String
+     * @param rg - tipo String
+     * @param idade - int
+     * @return Cliente - retorna o objeto cliente
+     */
     public Cliente cadastrarCliente(String nome, String rg, int idade) {
 
         Cliente cliente;
